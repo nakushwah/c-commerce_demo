@@ -3,7 +3,7 @@ Views for the all payment related operation.inheriting the WishlistCart's models
 Payment's models and Generic views also using the strip payment gateway for the
 payment, and django's send_mail for sending emails
 """
-
+from pprint import pprint
 
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -71,11 +71,10 @@ class CheckOutPayment(View):
 
 @csrf_exempt
 def my_webhook_view(request):
-
     """
-    this module is created for the making after payment's operations
-    we are using here the Stripe's Webhook API for checking the session
-    and sending the email to user about their purchase information
+       this module is created for the making after payment's operations
+       we are using here the Stripe's Webhook API for checking the session
+       and sending the email to user about their purchase information
     """
 
     payload = request.body
@@ -91,6 +90,7 @@ def my_webhook_view(request):
         # Invalid signature
         return HttpResponse(status=400)
     # Handle the checkout.session.completed event
+    pprint(event['data'])
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         cart = UserCart.objects.get(id=session['metadata']['cart_id'])

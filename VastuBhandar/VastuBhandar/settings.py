@@ -131,8 +131,8 @@ STRIPE_SECRET_KEY = 'sk_test_51JtQGMSEnLzHRlrPClGLHovBHUGyWlnyjZN2wR4B1FjYvYkCRD
 STRIPE_WEBHOOK_SECRET = 'whsec_yiQPYq8n4gkJEDMNCFuBanbgcKsz4isv'
 
 # CELERY VARIABLE CONFIGURATION
-BROKER_URL = 'amqp://guest:guest@localhost:5672//'
-# CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq3:5672//'
+# BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
