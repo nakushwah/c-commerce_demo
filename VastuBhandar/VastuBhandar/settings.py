@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'WishlistCart',
     'crispy_forms',
     'django_celery_results',
-
 ]
 
 MIDDLEWARE = [
@@ -76,8 +75,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'VastuBhandar.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,8 +83,6 @@ DATABASES = {
 }
 
 # Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -104,61 +99,47 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-########################################################################################################################
-# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
 ]
-########################################################################################################################
-
-###############################################
+# Media Configuration
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/home'
 
-# =========================== STRIPE CREDENTIALS ============================
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51JtQGMSEnLzHRlrPKrwXAy5RIkrdmyDHd759FZeeY7L7eVNESqeNmKXudaF89UXbE6PMibWY6voBviwJQbbOKiUR00JmR7E11x'
-STRIPE_SECRET_KEY = 'sk_test_51JtQGMSEnLzHRlrPClGLHovBHUGyWlnyjZN2wR4B1FjYvYkCRDvsxrYudFYvw15nb2z4bXdV91AdUIZd7w8LYQvc00iSGUddMi'
+# STRIPE CREDENTIALS
+"""
+create a account on stripe and can replace keys here
+"""
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51JtQGMSEnLzHRlrPKrwXAy5RIkrdmyDHd759FZeeY7L7eVNESqeNmKXudaF89UXbE6PMibWY6voBviwJQbbOKiUR00JmR7E11x '
+STRIPE_SECRET_KEY = 'sk_test_51JtQGMSEnLzHRlrPClGLHovBHUGyWlnyjZN2wR4B1FjYvYkCRDvsxrYudFYvw15nb2z4bXdV91AdUIZd7w8LYQvc00iSGUddMi '
 STRIPE_WEBHOOK_SECRET = 'whsec_yiQPYq8n4gkJEDMNCFuBanbgcKsz4isv'
-################# CELERY VARIABLE CONFIGURATION##################
 
-# BROKER_URL = 'amqp://guest:guest@localhost:5672//'
-CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq3:5672//'
+# CELERY VARIABLE CONFIGURATION
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+# CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq3:5672//'
 CELERY_RESULT_BACKEND = 'django-db'
-
-# CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
-
 CELERY_CACHE_BACKEND = 'default'
 CACHES = {
     'default': {
@@ -167,12 +148,10 @@ CACHES = {
     }
 }
 
-
-############################ EMAIL SMTP CONFIGURATION ##########
+# EMAIL SMTP CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'lmsdemobestpeers@gmail.com'
 EMAIL_HOST_PASSWORD = 'one23four'
-

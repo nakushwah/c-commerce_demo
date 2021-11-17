@@ -1,4 +1,9 @@
-from pprint import pprint
+"""
+Views for the all payment related operation.inheriting the WishlistCart's models,
+Payment's models and Generic views also using the strip payment gateway for the
+payment, and django's send_mail for sending emails
+"""
+
 
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -14,6 +19,9 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class CheckOutPage(TemplateView):
+    """ module for creating a checkout page for selected product
+     from cart and make payment for it
+     """
     template_name = "checkout.html"
 
     def get_context_data(self, **kwargs):
@@ -28,6 +36,10 @@ class CheckOutPage(TemplateView):
 
 
 class CheckOutPayment(View):
+    """
+    creating a stripe payment intent with a product's details
+    in this module using Stripe's API for creating intent
+    """
 
     def post(self, request, *args, **kwargs):
         cart_id = self.kwargs['cart_id']
@@ -60,6 +72,12 @@ class CheckOutPayment(View):
 @csrf_exempt
 def my_webhook_view(request):
 
+    """
+    this module is created for the making after payment's operations
+    we are using here the Stripe's Webhook API for checking the session
+    and sending the email to user about their purchase information
+    """
+
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     try:
@@ -72,11 +90,9 @@ def my_webhook_view(request):
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
         return HttpResponse(status=400)
-
-        # Handle the checkout.session.completed event
+    # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        pprint(session)
         cart = UserCart.objects.get(id=session['metadata']['cart_id'])
         payment = PaymentCheckOut.objects.create(
             cart=cart, amount=session['amount_total'],

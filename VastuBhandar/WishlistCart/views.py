@@ -1,3 +1,10 @@
+"""
+File containing  with two model's views
+1. UserCart
+2 .Wishlist
+"""
+
+
 import uuid
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
@@ -6,8 +13,8 @@ from .models import UserCart, Wishlist
 from products.models import Product
 
 
-# Create your views here.
 class CreateCart(LoginRequiredMixin, View):
+
     def get(self, request, pk):
         product = Product.objects.get(id=uuid.UUID(pk))
         obj = UserCart.objects.get_or_create(
@@ -42,6 +49,7 @@ class DeleteCartProduct(LoginRequiredMixin, View):
 
 # ============================== Wishlist Views =============================================
 class AddProductWishlist(LoginRequiredMixin, View):
+
     def get(self, request, pk):
         obj = Wishlist.objects.get_or_create(
             user_id=self.request.user,
