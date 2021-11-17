@@ -1,0 +1,65 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block content %}
+<!--checkout section-->
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+                  <script src="https://js.stripe.com/v3/"></script>
+
+ <section id="checkout">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="checkout-area">
+          <form action="">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="checkout-left">
+                  <div class="panel-group" id="accordion">
+                    </div>
+                  </div>
+                </div>
+              </div>
+<!--              <div class="col-md-4">-->
+                <div class="checkout-right">
+                  <h4>Order Summary</h4>
+                  <div class="aa-order-summary-area">
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{cart_product.product_id.name}}<strong> x{{cart_product.quantity}}</strong></td>
+                          <td>{{cart_product.cart_price}}</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Total</th>
+                          <td>{{cart_product.cart_price}}</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <button type="button" id="checkout-button">Checkout</button>
+                </div>
+              </div>
+            </div>
+          </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+  {%csrf_token%}
+ <!-- / checkout section -->
+{% endblock content %}
+
+
+
+
+
+

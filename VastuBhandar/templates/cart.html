@@ -1,0 +1,87 @@
+{%extends "Base.html" %}
+{% block content %}
+ <section id="cart-view">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="cart-view-area">
+           <div class="cart-view-table">
+             <form action="">
+               <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>action</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>CheckOut</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for cart in data %}
+                      <tr>
+                        <td>
+                          <a class="remove" href="/carts/DeleteCartProduct/{{cart.id}}"><fa class="fa fa-close"></fa></a>
+                          <a class="remove" href="/carts/CartEdit/{{cart.id}}"><fa class="fa fa-edit"></fa></a>
+                        </td>
+                        <td><a href="#"><img src="{{cart.product_id.image1.url}}" alt="img"></a></td>
+                        <td><a class="aa-cart-title" href="#">{{cart.product_id.name}}</a></td>
+                        <td>{{cart.product_id.price}}</td>
+                        <td>{{cart.quantity}}</td>
+                        <td>{{cart.product_id.price}}</td>
+                        <td><a href="/payments/CreatePayment/{{cart.id}}">Buy</a></td>
+                      </tr>
+                    {%endfor%}
+                      </tbody>
+                  </table>
+                </div>
+             </form>
+             <!-- Cart Total view -->
+             <div class="cart-view-total">
+               <h4>Cart Totals</h4>
+               <table class="aa-totals-table">
+                 <tbody>
+                   <tr>
+                     <th>Subtotal</th>
+                     <td>$450</td>
+                   </tr>
+                   <tr>
+                     <th>Total</th>
+                     <td>$450</td>
+                   </tr>
+                 </tbody>
+               </table>
+               <a href="#" class="aa-cart-view-btn">Proced to Checkout</a>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
+
+
+  <!-- Subscribe section -->
+  <section id="aa-subscribe">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-subscribe-area">
+            <h3>Subscribe our newsletter </h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
+            <form action="" class="aa-subscribe-form">
+              <input type="email" name="" id="" placeholder="Enter your Email">
+              <input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Subscribe section -->
+{% endblock content %}
+  <!-- footer -->  

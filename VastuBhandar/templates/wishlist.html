@@ -1,0 +1,47 @@
+{% extends 'Base.html' %}
+{% block content %}
+ <!-- Cart view section -->
+ <section id="cart-view">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="cart-view-area">
+           <div class="cart-view-table aa-wishlist-table">
+             <form action="">
+               <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Stock Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {%for wishlist in data %}
+                      <tr>
+                        <td><a class="remove" href="/carts/DeleteProductWishlist/{{wishlist.pk}}">
+                          <fa class="fa fa-close"></fa></a></td>
+                        <td><a href="#"><img src="{{wishlist.product_id.image1.url}}" alt="img"></a></td>
+                        <td><a class="aa-cart-title" href="#">{{wishlist.product_id.name}}</a></td>
+                        <td>{{wishlist.product_id.price}}</td>
+                        <td>{{wishlist.product_id.stocks}}</td>
+                        <td><a href="/carts/CreateCart/{{wishlist.product_id.id}}" class="aa-add-to-cart-btn">Add To Cart</a></td>
+                      </tr>
+                    {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
+             </form>             
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
+
+{% endblock content %}

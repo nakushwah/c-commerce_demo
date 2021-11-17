@@ -1,0 +1,52 @@
+{% load static %}
+
+!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="{%static 'js/bootstrap.js' %}"></script>
+  <!-- SmartMenus jQuery plugin -->
+  <script type="text/javascript" src="{%static 'js/jquery.smartmenus.js' %}"></script>
+  <!-- SmartMenus jQuery Bootstrap Addon -->
+  <script type="text/javascript" src="{%static 'js/jquery.smartmenus.bootstrap.js' %}"></script>
+  <!-- To Slider JS -->
+  <script src="{%static 'js/sequence.js' %}"></script>
+  <script src="{%static 'js/sequence-theme.modern-slide-in.js' %}"></script>
+  <!-- Product view slider -->
+  <script type="text/javascript" src="{%static 'js/jquery.simpleGallery.js'%}"></script>
+  <script type="text/javascript" src="{%static 'js/jquery.simpleLens.js'%}"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="{%static 'js/slick.js' %}"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="{%static 'js/nouislider.js'%}"></script>
+  <!-- Custom js -->
+  <script src="{%static 'js/custom.js'%}"></script>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+var stripe = Stripe("{{secret_key}}")
+var checkoutButton = document.getElementById("checkout-button");
+checkoutButton.addEventListener("click", function() {
+  fetch( '/payments/CheckOutPayment/{{cart_product.id}}' ,
+  {
+      method: 'POST',
+      headers:{
+      'X-CSRFToken':csrftoken
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(session) {
+      return stripe.redirectToCheckout({ sessionId: session.id });
+    })
+    .then(function(result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, you should display the localized error message to your
+      // customer using `error.message`.
+      if (result.error) {
+        alert(result.error.message);
+   }
+  });
+  })
+</script>
