@@ -6,7 +6,7 @@ ________________________________________________________________________________
   git clone https://github.com/nakushwah/c-commerce_demo.git
   ```
   
-* ######**Requirments :-**
+* ###### **Requirments :-**
     ```
      See the requirments.txt file and run the command 
      pip3 install -r requirments.txt
@@ -46,17 +46,17 @@ ________________________________________________________________________________
 
 * ###### **Start the Project :-**
   For running the project we have to use three terminal tab because we are using Celery , Django , Stripe_cli
-  before starting Django's server start the Celery and Stripe cli in diff terminal tab \
+  before starting Django's server start the Celery and Stripe cli in diff terminal tab 
   
-  ####### Start celery worker 
+  **_Start celery worker_** 
   * ```
      celery -A VastuBhandar worker -l info
     ```
-  ###### start Stripe cli listen  command
+  _**start Stripe cli listen  command**_
   * ```
        stripe listen --forward-to localhost:8000/payments/my_webhook_view/
     ```
-  ###### Start the Django's Server
+  **_Start the Django's Server_**
   * ```
       ./manage.py runserver
     ```
